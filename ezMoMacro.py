@@ -14,7 +14,7 @@ def run():
     global enabled
     app = pywinauto.Desktop(backend="win32").MortalOnline2
     while enabled:
-        i = 0
+        i = 1
         while i <= cycle_length:
             if not enabled:
                 break
