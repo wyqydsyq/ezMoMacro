@@ -1,5 +1,6 @@
 import time
 import keyboard
+import pywintypes
 import pywinauto
 from parameters import toggle_key, action_key, action_duration, rest_interval, cycle_length, rest_key
 
