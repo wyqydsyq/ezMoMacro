@@ -16,9 +16,9 @@ This is a simple and configurable script that can be used to macro various actio
  - Run `ezMoMacro.py`, on Windows you should be able to just double-click it. Otherwise in a command prompt run: `python3 ezMoMacro.py`
 
 ## Parameters
-`toggle_key` - key to use for toggling the macro on/off
-`action_key` - key to use for macro action, generally will be E for self-casting, Q for target-casting and LMB for swinging
-`action_duration` - how long to wait between triggering each action (should be roughly the time it takes to perform the action ingame)
-`cycle_length` - amount of times to repeat action each cycle
-`rest_key` - key to use for resting, this should be whatever hotkey you bind rest to ingame
-`rest_interval` - amount of seconds to rest for between each action cycle, set to 0 to disable resting
+  - `toggle_key` - key to use for toggling the macro on/off
+  - `action_key` - key to use for macro action, generally will be E for self-casting, Q for target-casting and LMB for swinging
+  - `action_duration` - how long to wait between triggering each action (should be roughly the time it takes to perform the action ingame)
+  - `cycle_length` - amount of times to repeat action each cycle
+  - `rest_key` - key to use for resting, this should be whatever hotkey you bind rest to ingame
+  - `rest_interval` - amount of seconds to rest for between each action cycle, set to 0 to disable resting
