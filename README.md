@@ -12,7 +12,7 @@ This is a simple and configurable script that can be used to macro various actio
   - Install dependencies by running `install-requirements.bat` or `pip install -r requirements.txt` in the `ezMoMacro` folder
 
 ## Usage
- - Edit the configurable paramaters like keybinds and timings at the top of `ezMoMacro.py` to suit your needs for whatever you're macroing
+ - Edit the configurable paramaters like keybinds and timings in `parameters.py` to suit your needs for whatever you're macroing
  - Run `ezMoMacro.py`, on Windows you should be able to just double-click it. Otherwise in a command prompt run: `python3 ezMoMacro.py`
 
 ## Parameters
