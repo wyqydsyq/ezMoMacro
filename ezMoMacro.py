@@ -15,7 +15,7 @@ def run():
     app = pywinauto.Desktop(backend="win32").MortalOnline2
     while enabled:
         i = 0
-        while i < cycle_length:
+        while i <= cycle_length:
             if not enabled:
                 break
             app.send_keystrokes(action_key)
