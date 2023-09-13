@@ -9,7 +9,7 @@ This is a simple and configurable script that can be used to macro various actio
 ## Requirements
   - Install [Python 3](https://www.python.org/downloads/windows/)
   - Clone or download & extract files from this repository somewhere on your computer
-  - Install dependencies by running `install-requirements.bat` or `pip install -r requirements.txt` in the `ezMoMacro` folder
+  - Install dependencies by running `install-requirements.bat` or `pip3 install -r requirements.txt` in the `ezMoMacro` folder
 
 ## Usage
  - Edit the configurable paramaters like keybinds and timings in `parameters.py` to suit your needs for whatever you're macroing
