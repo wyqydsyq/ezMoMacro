@@ -31,7 +31,7 @@ Useful for pickaxe sieging, levelling strength, dexterity, melee combat, aggress
 ### Autocast
 Useful for levelling intelligence, psyche, resting and basically all mage skills.
 
-You can configure the hotkeys used for chanelling a spell, self-casting it and resting by changing the variables at the top of the script. By default it will press "9" to channel spell, "E" to self-cast, "0" to rest.
+You can configure the hotkeys used for chanelling a spell, self-casting it and resting by changing the variables at the top of the script. By default it will press "E" to self-cast, "0" to rest.
 
 #### Parameters
   - `action_key` - key to use for macro action, generally will be E for self-casting, Q for target-casting and LMB for swinging
