@@ -1,13 +1,11 @@
+walk_time = 3 # how long to walk in each direction
+
+instructions = 'Holds W then S for '+str(walk_time)+'s each.'
+
 import warnings
 import time
 import asyncio
-walk_time = 3
-
-
 warnings.filterwarnings("ignore")
-
-instructions = 'Holds W then S for '+str(walk_time)+'s.'
-
 
 async def macro(app):
     await asyncio.sleep(0.2)
