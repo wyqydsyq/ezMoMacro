@@ -49,7 +49,7 @@ instructions = 'Instructions on how to use the macro'
 async def macro(app):
 ```
 
-`app` is an instance of [pywinauto](https://pywinauto.readthedocs.io/en/latest/code/pywinauto.base_wrapper.html) connected to the game window, you can use methods like `press_mouse_input()` and `send_keystrokes()` to send input commands to the game window.
+`app` is an instance of a [pywinauto window](https://pywinauto.readthedocs.io/en/latest/code/pywinauto.controls.hwndwrapper.html) connected to the game window, you can use methods like `press_mouse_input()` and `send_keystrokes()` to send input commands to the game window.
 
 `instructions` is an optional string you can specify that will be displayed on the right hand pane of ezMoMacro when the macro is selected.
 
