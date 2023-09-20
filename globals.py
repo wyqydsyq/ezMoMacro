@@ -12,3 +12,9 @@ version = 'v1.1.0'
 
 global url
 url = 'https://github.com/wyqydsyq/ezMoMacro'
+
+global macros
+macros = []
+
+global macroList
+macroList = []
