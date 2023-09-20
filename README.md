@@ -12,9 +12,14 @@ This is a simple and configurable script that can be used to macro various actio
   - Install dependencies by running `install-requirements.bat` or `pip3 install -r requirements.txt` in the `ezMoMacro` folder
 
 ## Usage
- - Edit any paramaters at the top of the macro you want to suit your needs e.g. if you want to use autocast for levelling magic skills, set the keys to match your keybindings and `action_duration` to match the duration it takes to cast the spell (most spells take ~25% longer to complete cast animation than their "cast time" listed ingame).
  - Run `ezMoMacro.py`, on Windows you should be able to just double-click it. Otherwise in a command prompt run: `python3 ezMoMacro.py`.
  - Select the macro you want to run, press the toggle hotkey to enable/disable it.
+
+## Customization
+ - Edit any paramaters defined at the top of a macro file to suit your needs
+    
+    e.g. if you want to use autocast for levelling magic skills, set the keys to match your keybindings and `action_duration` to match the duration it takes to cast the spell (most spells take ~25% longer to complete cast animation than their "cast time" listed ingame) you're currently using.
+ - You can make changes to a macro and reload it with `ctrl+r`
 
 ## Macros
 ### Autowalk
@@ -34,3 +39,18 @@ You can configure the hotkeys used for chanelling a spell, self-casting it and r
   - `cycle_length` - amount of times to repeat action each cycle
   - `rest_key` - key to use for resting, this should be whatever hotkey you bind rest to ingame
   - `rest_duration` - amount of seconds to rest for between each action cycle, set to 0 to disable resting
+
+## Writing macros
+Macros are just simple python scripts of the pattern:
+```py
+instructions = 'Instructions on how to use the macro'
+async def macro(app):
+```
+
+`app` is an instance of [pywinauto](https://pywinauto.readthedocs.io/en/latest/code/pywinauto.base_wrapper.html) connected to the game window, you can use methods like `press_mouse_input()` and `send_keystrokes()` to send input commands to the game window.
+
+`instructions` is an optional string you can specify that will be displayed on the right hand pane of ezMoMacro when the macro is selected.
+
+Use `asyncio.sleep()` instead of `time.sleep()` for places where your macro should be interruptable (via toggle key). Generally this means always use `asyncio.sleep()` except for cases where you are manually simulating keydown/keyup, for those you will want to use `time.sleep()` so the macro doesn't get interrupted before they key is released (otherwise the key will be stuck held ingame until it's manually pressed again)
+
+You can use any other Python libraries you like to expand functionality of your macros e.g. you can use `app.capture_as_image()` to take a screenshot of the game window and pass that into [ImageAI](https://github.com/OlafenwaMoses/ImageAI#-image-classification) to do things like detecting objects and then base your macro behaviour on what was detected.
