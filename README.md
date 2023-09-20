@@ -1,5 +1,7 @@
 # ezMoMacro
-This is a simple and configurable script that can be used to macro various actions in Mortal Online 2.
+This is a simple and configurable macro runner written in Python3 that can be used to macro various actions in Mortal Online 2.
+
+![ezMoMacro](https://i.imgur.com/wsQNyst.png)
 
 # Features
   - Fully configurable
