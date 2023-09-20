@@ -3,6 +3,7 @@ import importlib
 from os.path import dirname, basename, isfile, join
 import asyncio
 import os
+import gc
 
 import keyboard
 import pywintypes
@@ -48,13 +49,12 @@ def loadMacros():
     return macroList
 
 
-def reload(t):
+def reload(app, t):
     globals.running = False
     for task in tasks:
         task.cancel()
 
-    print(t.home + t.white_on_black + t.clear)
-    globals.macroList = loadMacros()
+    globals.mainTask.cancel()
 
 
 async def run(app):
@@ -81,6 +81,26 @@ async def main(app, t):
                     with t.location(2, 2 + i):
                         print(t.white_on_black(macro))
 
+            if (hasattr(globals.macros[globals.selected], 'instructions')):
+                lines = list(
+                    enumerate(t.wrap(globals.macros[globals.selected].instructions, t.width // 2)))
+                h = 0
+                while h < t.height - 2:
+                    with t.location(y=2 + h, x=t.width // 2):
+                        if h < len(lines):
+                            blankSpace = ' ' * \
+                                ((t.width // 2) - len(lines[h][1]))
+                            print(lines[h][1] + blankSpace, end='')
+                        else:
+                            print(' ' * (t.width // 2), end='')
+                        h += 1
+            else:
+                h = 0
+                while h < t.height - 2:
+                    with t.location(y=2 + h, x=t.width // 2):
+                        print(' ' * (t.width // 2), end='')
+                        h += 1
+
             with t.location(0, t.height - 1):
                 statusStr = (' Disabled ', ' Enabled ')[globals.enabled]
                 if (globals.enabled):
@@ -101,7 +121,7 @@ async def main(app, t):
                     end='', flush=True)
 
             if globals.enabled:
-                task = asyncio.create_task(run(app))
+                task = globals.loop.create_task(run(app))
                 tasks.append(task)
                 try:
                     await task
@@ -110,13 +130,34 @@ async def main(app, t):
             else:
                 await asyncio.sleep(0.1)
 
+app = pywinauto.Desktop(backend="win32").MortalOnline2
 t = Terminal()
 keyboard.add_hotkey(toggle_key, lambda: toggle())
 keyboard.add_hotkey(quit_key, lambda: os._exit(0))
-keyboard.add_hotkey(reload_key, lambda: reload(t))
+keyboard.add_hotkey(reload_key, lambda: reload(app, t))
 keyboard.add_hotkey('up', lambda: prev())
 keyboard.add_hotkey('down', lambda: next())
 
-app = pywinauto.Desktop(backend="win32").MortalOnline2
-globals.macroList = loadMacros()
-asyncio.run(main(app, t))
+
+def start():
+    try:
+        globals.macroList = loadMacros()
+        globals.mainTask = globals.loop.create_task(main(app, t))
+        globals.loop.run_until_complete(globals.mainTask)
+    except asyncio.CancelledError:
+        globals.loop.shutdown_asyncgens()
+        globals.loop.stop()
+        gc.collect()
+
+        globals.macroList = loadMacros()
+        for macro in globals.macros:
+            importlib.reload(macro)
+
+        globals.loop = asyncio.new_event_loop()
+        globals.mainTask = globals.loop.create_task(main(app, t))
+
+        print(t.home + t.white_on_black + t.clear)
+        start()
+
+
+start()

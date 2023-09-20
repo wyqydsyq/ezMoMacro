@@ -18,3 +18,11 @@ macros = []
 
 global macroList
 macroList = []
+
+import asyncio
+
+global loop
+loop = asyncio.new_event_loop()
+
+global mainTask
+mainTask = loop.create_task(asyncio.sleep(0))
